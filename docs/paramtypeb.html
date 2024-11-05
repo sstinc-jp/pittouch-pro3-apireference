@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Type Bの検出と読み取り - PitTouch Pro3 APIリファレンス</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">PitTouch Pro3 APIリファレンス</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="prooperate.html" class="nav-link">ProOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="profileoperate.html" class="nav-link">ProFileOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="proprintoperate.html" class="nav-link">ProPrintOperate</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#type_b" class="nav-link">Type Bの検出と読み取り</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">検出フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">コマンド実行フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">消失検出フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="type_b">Type Bの検出と読み取り<a class="headerlink" href="#type_b" title="Permanent link">&para;</a></h1>
+<p>Type Bカードが検出された場合、Type Bコマンド定義ファイル(最大4つ)に従いコマンドを実行し、その結果を取得することができる。</p>
+<p>事前にWeb設定ページからコマンド定義ファイルと暗号化の設定を行っておく必要がある。</p>
+<p>Type Bの処理は、検出フェーズ→コマンド実行フェーズ→消失検出フェーズ の順に行われる。</p>
+<h2 id="_1">検出フェーズ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>PUPIの取得後、Activationを行う。成功したらType Bの検出とみなしコマンド実行フェーズに移行する。
+失敗した場合は何もしない。</p>
+<h2 id="_2">コマンド実行フェーズ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>一連のType Bコマンド定義ファイルに従ってコマンドを実行する。
+一つのコマンド定義ファイルに記述されている全コマンド(最大8個)を順に実行する。
+すべてのコマンドに成功応答があった場合、<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれ、最後のコマンドの実行結果がresponseObjectの<code>data</code>として渡される。
+その後消失検出フェーズに移行する。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 3, // 3:TYPEB
+    paramResult: 1, // 1:成功
+    idm: &quot;00112233&quot;, // PUPI
+    auth: &quot;007649d95a10a51006c3bab68def3eb9&quot;, // 実行に成功したコマンド定義ファイルのMD5   
+    data: &quot;aabbccdd&quot; // 最後のコマンド実行結果
+})
+</code></pre>
+<p>いずれかのコマンドに成功以外の応答があった場合、そのコマンド定義ファイルの処理を中止し、次のコマンド定義ファイルの処理に移る。</p>
+<p>ファイル中の全コマンドに成功したコマンド定義ファイルが無かった場合は、<a href="paramonevent.html">onEvent</a>がeventCode=1でエラーを通知する。エラー時のresponseObjectの<code>paramResult</code>は-1。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 3, // 3:TYPEB
+    paramResult: -1 // -1:失敗
+})
+</code></pre>
+<p>また、途中でカードとの通信が途絶えた場合も、次のコマンド定義ファイルの処理へは移らず、エラーを通知する。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 3, // 3:TYPEB
+    paramResult: -1 // -1:失敗
+})
+</code></pre>
+<h2 id="_3">消失検出フェーズ<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>同じカードを繰り返し検出することを避けるためのフェーズである。
+異なるType Bのカードの応答を受信するか応答が無くなった場合に消失とみなす。</p>
+<p>消失時、<a href="paramonevent.html">onEvent</a>がeventCode=0で呼ばれる。
+通知されるPUPIは、(「異なるType Bのカードの応答を受信」した場合でも) 元々検出したカードのものである。</p>
+<pre><code class="language-js">onEvent(0, {
+    idm: &quot;00112233&quot; // PUPI
+})
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright © 2024 Smart Solution Technology, Inc.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8" defer></script>
+        <script src="js/extra.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

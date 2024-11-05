@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>FeliCaの検出と読み取り - PitTouch Pro3 APIリファレンス</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">PitTouch Pro3 APIリファレンス</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="prooperate.html" class="nav-link">ProOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="profileoperate.html" class="nav-link">ProFileOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="proprintoperate.html" class="nav-link">ProPrintOperate</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#felica" class="nav-link">FeliCaの検出と読み取り</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">検出フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">読み取りフェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">消失検出フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#felica_1" class="nav-link">FeliCaパラメータオブジェクト</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#felica_2" class="nav-link">FeliCa読み取りオブジェクト</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="felica">FeliCaの検出と読み取り<a class="headerlink" href="#felica" title="Permanent link">&para;</a></h1>
+<p>対象のFeliCaとそのFeliCaから読み取るデータを、FeliCaパラメータオブジェクトで指定する。</p>
+<p>FeliCaパラメータオブジェクトでは、対象のFeliCaのシステムを<code>systemCode</code>で指定し、またそのシステムからデータを読み取る場合はFelica読み取りオブジェクトを<code>service</code>に指定する。</p>
+<pre><code class="language-js">feilca:[ // FeliCaパラメータオブジェクト
+  {
+    systemCode: &quot;0001&quot;,
+    useMasterIDm: true,
+    service: [ // FeliCa読み取りオブジェクト
+      { serviceCode: &quot;1234&quot;, offsetBlock: 0, block: 1 },
+      { serviceCode: &quot;5678&quot;, offsetBlock: 1, block: 1 }
+    ]
+  }
+]
+</code></pre>
+<p>FeliCaパラメータオブジェクトは最大4つ指定可能。
+FeliCaを検出したときに、指定した順にマッチングが行われ、最初にマッチしたFeliCaパラメータオブジェクトが使われる。
+いずれのFeliCaパラメータオブジェクトにもマッチしなかった場合は、そのFeliCaは無視される。</p>
+<p>FeliCaの処理は、検出フェーズ→読み取りフェーズ→消失検出フェーズ の順に行われる。</p>
+<div class="admonition warning">
+<p class="admonition-title">FeliCaとType Aを同時に検出する設定にした場合</p>
+<p>NFC対応スマートフォンの一部の機種では、かざすタイミングによってFeliCa／Type Aのどちらか一方が検出される。
+Type Aとして検出された場合は「その他のType A」として検出され、UIDはNFCの仕様によりランダムな値になっている場合がある。
+「その他のType A」が検出された場合、startCommunicationをFeliCaのみの設定で再度行うことで、NFCスマホをFeliCaとして検出することができる。</p>
+</div>
+<h2 id="_1">検出フェーズ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>検出時、システムコード0xFFFFでポーリングを行い任意のカードに応答させる。
+カードから応答があった場合は、FeliCaパラメータオブジェクトがマッチするかを先頭から順に調べる。</p>
+<p>マッチする条件は以下</p>
+<ul>
+<li><code>systemCode</code>で指定したシステムがカード上に存在する。</li>
+<li><code>service</code>が指定されている場合、カードのそのシステム上に<code>service</code>で指定したサービスがすべて存在する</li>
+</ul>
+<p><code>systemCode</code>に"FFFF"が指定されていた場合、無条件でマッチする。</p>
+<p>マッチするFeliCaパラメータオブジェクトが見つかった場合、読み取りフェーズに移行する。
+見つからなかった場合はそのFeliCaは無視される。</p>
+<h2 id="_2">読み取りフェーズ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><code>systemCode</code>が"FFFF"の場合、または<code>service</code>の指定がない場合は、<code>data</code>無しですぐに<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれる。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 0, // 0:FeliCa
+    paramResult: 1, // 何番目のFeliCaパラメータオブジェクトにマッチしたか
+    idm: &quot;0011223344556677&quot;,
+})
+</code></pre>
+<p><code>service</code>でFeliCa読み取りオブジェクトの指定がある場合、検出後に<code>serviceCode</code>、<code>offsetBlock</code>、<code>block</code>の指定に従いFeliCaのread without encryptionコマンドでデータの読み取りを行う。</p>
+<p>読み取りに成功した場合は、<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれ、読み取りデータが渡される。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 0, // 0:FeliCa
+    paramResult: 1, // 何番目のFeliCaパラメータオブジェクトにマッチしたか
+    idm: &quot;0011223344556677&quot;,
+    data: &quot;aabbccdd&quot; // 読み取ったデータ
+})
+</code></pre>
+<p>読み取りに失敗した場合は、<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれる。<code>paramResult</code>は負の値が渡される。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 0, // 0:FeliCa
+    paramResult: -1 // 1番目のFeliCaパラメータオブジェクトの読み取りに失敗
+})
+</code></pre>
+<p>読み取りフェーズ後は、成功失敗にかからわず消失検出フェーズに移行する。</p>
+<h2 id="_3">消失検出フェーズ<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>同じカードを繰り返し検出することを避けるためのフェーズである。
+検出時と同じシステムコードでポーリングを行い、異なるカードの応答を受信するかポーリングの応答が無くなった場合に消失とみなす。</p>
+<p>消失時、<a href="paramonevent.html">onEvent</a>がeventCode=0で呼ばれる。
+通知されるIDmは、(「異なるカードの応答を受信」した場合でも) 元々検出したカードのものである。</p>
+<pre><code class="language-js">onEvent(0, {
+    idm: &quot;0011223344556677&quot;
+})
+</code></pre>
+<h2 id="felica_1">FeliCaパラメータオブジェクト<a class="headerlink" href="#felica_1" title="Permanent link">&para;</a></h2>
+<p>FeliCa検出時、先頭のオブジェクトから順に以下の条件を満たすか否か確認する。</p>
+<ul>
+<li>検出されたFeliCaのシステムコードが、オブジェクトのシステムコード(systemCode)と一致</li>
+<li>検出されたFeliCaが、読み取りオブジェクトに含まれるすべてのサービスコード(serviceCode)に対応</li>
+</ul>
+<p>これらの条件をすべて満たすオブジェクトが見つかった場合、そのオブジェクトに従って動作する。 1つでも条件を満たさない場合は、次のオブジェクトを確認する。 設定されたすべてのオブジェクトが条件を満たさない場合は、そのFeliCaは無視される。</p>
+<p>システムコードによらずすべてのFeliCaを検出したい場合は、オブジェクトのシステムコードにFFFFを設定する。 例えば、オブジェクトにsystemCode:FFFFのみ設定することで、すべてのFeliCaのFeliCaIDが取得できる。
+カードの鍵なし領域を取得する場合は、該当するservice(FeliCa読み取りオブジェクト)を指定する。</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>systemCode</td>
+<td>String(16進数)</td>
+<td>読み取り対象のシステムコードを指定する(0000-FFFF)。未指定時はFFFFがデフォルト。</td>
+</tr>
+<tr>
+<td>useMasterIDm</td>
+<td>Bool</td>
+<td>FeliCa検出時、または消失時にonEventで通知されるIDmの種別を指定する。<br/>trueの場合、カード内システム0のIDm(マスターIDm)を通知する。<br/>falseの場合、マッチしたシステムのIDm(非マスターIDm)を通知する。<br/>※カード内システム番号は、IDmの製造者コードの上位4ビットを指す。<br/>デフォルトはtrue。</td>
+</tr>
+<tr>
+<td>service</td>
+<td>Array</td>
+<td>読み取り対象のサービス(FeliCa読み取りオブジェクト)を配列で、最大24個まで指定する。systemCodeがFFFFの場合は使用されない。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="felica_2">FeliCa読み取りオブジェクト<a class="headerlink" href="#felica_2" title="Permanent link">&para;</a></h2>
+<p>FeliCaの鍵なし領域の読み取りを指示する際のオブジェクト。読み取りは1ブロック単位で行う。 
+複数の読み取りオブジェクトが指定された場合、指定された領域をすべて読み取り、連結してonEventに渡される。
+読み取りオブジェクトのうち、1つでも読み取りに失敗すると読み取り失敗となる。</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>serviceCode</td>
+<td>String(16進数)</td>
+<td>読み取り対象のサービスコードを指定する(0000-FFFF)。</td>
+</tr>
+<tr>
+<td>offsetBlock</td>
+<td>Number</td>
+<td>読み取る領域のオフセットブロック数を指定する(0-65535)。未指定時0。</td>
+</tr>
+<tr>
+<td>block</td>
+<td>Number</td>
+<td>読み取る領域のブロック数を指定する(指定する全てのFeliCa読み取りオブジェクト(最大24個)のトータルで、24ブロックまで指定可能)。未指定時1。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>任意のFeliCaのIDmだけを読み取る</strong></p>
+<pre><code class="language-js">felica:[ // FeliCaパラメータオブジェクト
+  {
+    systemCode: &quot;FFFF&quot;,
+  }
+]
+</code></pre>
+<p><strong>システムコード0123のカードのIDmだけを読み取る(masterIDを返す)</strong></p>
+<pre><code class="language-js">felica:[ // FeliCaパラメータオブジェクト
+  {
+    systemCode: &quot;1234&quot;
+  }
+]
+</code></pre>
+<p><strong>システムコード0123のカードのIDmだけを読み取る(非masterIDmを返す)</strong></p>
+<pre><code class="language-js">felica:[ // FeliCaパラメータオブジェクト
+  {
+    systemCode: &quot;1234&quot;,
+    useMasterIdm: false  
+  }
+]
+</code></pre>
+<p><strong>システムコード0123または4567のカードのデータ読み取る</strong></p>
+<pre><code class="language-js">felica:[ // FeliCaパラメータオブジェクト
+  {
+    systemCode: &quot;0123&quot;,
+    useMasterIDm: true,
+    service: [ // FeliCa読み取りオブジェクト
+      { serviceCode: &quot;1234&quot;, offsetBlock: 0, block: 1 },
+      { serviceCode: &quot;5678&quot;, offsetBlock: 1, block: 1 }
+    ]
+  },
+  {
+    systemCode: &quot;4567&quot;,
+    useMasterIDm: true,
+    service: [ // FeliCa読み取りオブジェクト
+      { serviceCode: &quot;abcd&quot;, offsetBlock: 5, block: 1 },
+      { serviceCode: &quot;88aa&quot;, offsetBlock: 2, block: 1 }
+    ]
+  }
+]
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright © 2024 Smart Solution Technology, Inc.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8" defer></script>
+        <script src="js/extra.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

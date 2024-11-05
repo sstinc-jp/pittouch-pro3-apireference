@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>PitTouch Pro3 APIリファレンス</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">PitTouch Pro3 APIリファレンス</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem active">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="prooperate.html" class="nav-link">ProOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="profileoperate.html" class="nav-link">ProFileOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="proprintoperate.html" class="nav-link">ProPrintOperate</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="prooperate.html" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#pittouch_pro3" class="nav-link">PitTouch Pro3について</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">本ドキュメントについて</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_2" class="nav-link">構成</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_3" class="nav-link">サポート</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_4" class="nav-link">免責事項</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="pittouch_pro3">PitTouch Pro3について<a class="headerlink" href="#pittouch_pro3" title="Permanent link">&para;</a></h1>
+<p><a href="https://www.sstinc.co.jp/products/pittouch-pro3/">PitTouch Pro3</a> は、
+4.3インチLCDタッチパネルを搭載した、ネットワーク対応NFCカードリーダーです。
+WebKitを内蔵しており、HTML/JavaScriptやWebSQLを使用したアプリ(コンテンツセット)を作成することができます。</p>
+<p>NFCの制御、音声再生、USBメモリへのアクセスなどは、独自のAPIである Pro Javascript Framework(PJF) を使用して行います。</p>
+<h1 id="_1">本ドキュメントについて<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本ドキュメントは、Pro Javascript Framework(PJF) のリファレンスマニュアルです。
+利用者は、HTML/CSS/JavaScriptの基礎を理解していることを前提としています。</p>
+<p>本ドキュメントでは、PJFのAPIの使い方のみ説明しています。実際にAPIを使ったコンテンツセットを作成する場合は、SDKライセンスをご購入ください。</p>
+<h1 id="_2">構成<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>PJFは機能により3つのファイルに分かれています。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>パス</th>
+<th>機能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="prooperate.html">ProOperate</a></td>
+<td>/pjf/prooperate.js</td>
+<td>NFC、音声再生、端末の情報取得などを行う。</td>
+</tr>
+<tr>
+<td><a href="profileoperate.html">ProFileOperate</a></td>
+<td>/pjf/profileoperate.js</td>
+<td>USBメモリへのアクセスを行う。</td>
+</tr>
+<tr>
+<td><a href="proprintoperate.html">ProPrintOperate</a></td>
+<td>/pjf/proprintoperate.js</td>
+<td>ESC/POSプリンターの制御を行う。</td>
+</tr>
+</tbody>
+</table>
+<p>使用するには、以下のようにPJFのJavaScriptを読み込みます。</p>
+<pre><code class="language-js">&lt;script src=&quot;/pjf/prooperate.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>PJFの.jsファイルはPitTouch Pro3のファームウェアに内蔵されています。
+コンテンツセットから<code>/pjf/</code>にアクセスするとファームウェア内蔵のパスへのアクセスとなり、
+コンテンツセットの<code>/pjf/</code>ディレクトリにファイルを置いたとしてもアクセスはできません。</p>
+<h1 id="_3">サポート<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<p>github上ではサポートは受け付けていません。APIに関する問い合わせは弊社のサポート窓口までお願いいたします。
+なお、問い合わせについてはSDKライセンス購入者に限らせていただきます。</p>
+<h1 id="_4">免責事項<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<ul>
+<li>本マニュアルの内容は、予告無く変更する場合があります。</li>
+<li>株式会社スマート・ソリューション・テクノロジーは、正確な情報を提供するためにあらゆる措置を取っていますが、誤りや不作為について責任を負うものではありません。</li>
+<li>株式会社スマート・ソリューション・テクノロジーは、このマニュアルに記載されている情報の使用に起因するいかなる損害に対しても責任を負うものではありません。</li>
+<li>本マニュアルの一部、あるいは全部を無断で複写・複製・転載することは、固くお断りします。</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright © 2024 Smart Solution Technology, Inc.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8" defer></script>
+        <script src="js/extra.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.5.3
+Build Date UTC : 2024-11-05 01:47:22.279735+00:00
+-->

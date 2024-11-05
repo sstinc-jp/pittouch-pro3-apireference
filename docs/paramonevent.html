@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>onEvent - PitTouch Pro3 APIリファレンス</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">PitTouch Pro3 APIリファレンス</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="prooperate.html" class="nav-link">ProOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="profileoperate.html" class="nav-link">ProFileOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="proprintoperate.html" class="nav-link">ProPrintOperate</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#onevent" class="nav-link">onEvent</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#eventcode" class="nav-link">eventCode</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#responseobject" class="nav-link">responseObject</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#felica" class="nav-link">FeliCa例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#type_a" class="nav-link">Type A例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#type_b" class="nav-link">Type B例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="onevent">onEvent<a class="headerlink" href="#onevent" title="Permanent link">&para;</a></h1>
+<p>検出・読み取り結果は、引数param.onEventで指定したcallbackに通知される。</p>
+<pre><code class="language-js">onEvent({Number} eventCode, {Object} responseObject)
+</code></pre>
+<p>onEventにはeventCodeとresponseObjectが渡される。</p>
+<h2 id="eventcode">eventCode<a class="headerlink" href="#eventcode" title="Permanent link">&para;</a></h2>
+<p>eventCodeは以下を表す。</p>
+<ul>
+<li>0: カード消失イベント</li>
+<li>1: タッチイベント</li>
+</ul>
+<h2 id="responseobject">responseObject<a class="headerlink" href="#responseobject" title="Permanent link">&para;</a></h2>
+<p>responseObjectはデータ読み取りの成否や読み取ったデータを持つオブジェクト。</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>Number</td>
+<td>タッチしたカード種別。0:FeliCa。2:Type A。3:Type B。カード消失イベント時はundefined。</td>
+</tr>
+<tr>
+<td>paramResult</td>
+<td>Number</td>
+<td>何番目のFeliCa/MIFAREパラメータオブジェクトにヒットしたのかを示す(FeliCa:1-4、MIFARE:1-3)。<br/>データ読み取りに失敗した場合は、それぞれマイナスをつけた値となる。<br/>消失イベント時はundefinedとなる。<br/>MIFAREパラメータオブジェクトにヒットしなかった場合（指定されていないMIFAREやTypeAの場合）、undefinedとなる。<br/>Type Bの場合、1が成功、-1が失敗を表す。</td>
+</tr>
+<tr>
+<td>auth</td>
+<td>String(16進数)</td>
+<td>Type B定義コマンドにマッチした場合、その定義ファイルのMD5。マッチしなかった場合はundefined。</td>
+</tr>
+<tr>
+<td>idm</td>
+<td>String(16進数)</td>
+<td>FeliCa IDmまたはUID(Type A)またはPUPI(Type B)。データ読み取り失敗時はundefined。<br/>FeliCaの場合、<a href="paramfelica.html#felica_1">FeliCaパラメータオブジェクト</a>のuseMasterIDmによって返す値が異なる。<br/> NFC対応スマートフォンの一部の機種には、NFCの仕様によりUIDがランダムな値になっている場合がある。<br/>Type Bは、カードの実装によりPUPIがランダムな値になっている場合がある。</td>
+</tr>
+<tr>
+<td>data</td>
+<td>String(16進数)</td>
+<td>読み取ったデータ。消失イベント時、データ読み取り未指定時、データ読み取り失敗時はundefined。<br/>Type Bの場合、最後に実行に成功したコマンドの実行結果。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="felica">FeliCa例<a class="headerlink" href="#felica" title="Permanent link">&para;</a></h2>
+<p>felica検出時。カード読み取りなし。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 0, // 0:FeliCa
+    paramResult: 1, // 何番目のFeliCaパラメータオブジェクトにマッチしたか
+    idm: &quot;0011223344556677&quot; // IDm
+})
+</code></pre>
+<p>felica検出時。カード読み取りあり。読み取り成功。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 0, // 0:FeliCa
+    paramResult: 1, // 何番目のFeliCaパラメータオブジェクトにマッチしたか
+    idm: &quot;0011223344556677&quot;, // IDm
+    data: &quot;aabbccdd&quot; // 読み取ったデータ
+})
+</code></pre>
+<p>felica検出時。カード読み取りあり。読み取り失敗。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 0, // 0:FeliCa
+    paramResult: -1 // 1番目のFeliCaパラメータオブジェクトの読み取りに失敗
+})
+</code></pre>
+<p>felica消失イベント。</p>
+<pre><code class="language-js">onEvent(0, {
+    idm: &quot;0011223344556677&quot; // IDm
+})
+</code></pre>
+<h2 id="type_a">Type A例<a class="headerlink" href="#type_a" title="Permanent link">&para;</a></h2>
+<p>MIFARE検出イベント。カード読み取りなし。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    paramResult: 1, // 何番目のMIFAREパラメータオブジェクトにマッチしたか
+    idm: &quot;00112233445566&quot; // UID
+})
+</code></pre>
+<p>MIFARE検出イベント。カード読み取りあり。読み取り成功。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    paramResult: 1, // 何番目のMIFAREパラメータオブジェクトにマッチしたか
+    idm: &quot;00112233445566&quot;, // UID
+    data: &quot;aabbccdd&quot; // 読み取ったデータ
+})
+</code></pre>
+<p>MIFARE検出イベント。カード読み取りあり。読み取り失敗。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    paramResult: -1 // 1番目のMIFAREパラメータオブジェクトの読み取りに失敗
+})
+</code></pre>
+<p>MIFAREパラメータオブジェクトにマッチしないType Aの検出。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    // paramResultなし:その他のType A
+    idm: &quot;00112233445566&quot; // UID
+})
+</code></pre>
+<p>Type A消失イベント。</p>
+<pre><code class="language-js">onEvent(0, {
+    idm: &quot;00112233445566&quot; // UID
+})
+</code></pre>
+<h2 id="type_b">Type B例<a class="headerlink" href="#type_b" title="Permanent link">&para;</a></h2>
+<p>Type Bコマンド実行成功。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 3, // 3:Type B
+    paramResult: 1, // 1:成功
+    idm: &quot;00112233&quot; // PUPI
+    auth: &quot;007649d95a10a51006c3bab68def3eb9&quot;, // 実行に成功したコマンド定義ファイルのMD5   
+    data: &quot;aabbccdd&quot; // 最後のコマンド実行結果
+})
+</code></pre>
+<p>Type Bコマンド実行失敗。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 3, // 3:Type B
+    paramResult: -1 // -1:失敗
+})
+</code></pre>
+<p>Type B消失イベント。</p>
+<pre><code class="language-js">onEvent(0, {
+    idm: &quot;00112233&quot; // PUPI
+})
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright © 2024 Smart Solution Technology, Inc.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8" defer></script>
+        <script src="js/extra.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

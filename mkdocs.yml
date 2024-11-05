@@ -1,0 +1,44 @@
+site_name: PitTouch Pro3 APIリファレンス
+
+# file://で使うための設定。
+# https://www.mkdocs.org/user-guide/deploying-your-docs/#local-files
+# 標準のsearch pluginはfile://だと動かないので外す
+#site_url: ""
+copyright: "Copyright © 2024 Smart Solution Technology, Inc."
+docs_dir: "src"
+site_dir: "docs" # github pagesではdocs/が公開されるので、それにあわせる
+use_directory_urls: false
+plugins: []
+
+#strict: true
+
+markdown_extensions:
+  - toc:
+      permalink: True
+      separator: "_"
+      baselevel: 1
+      toc_depth: 2
+  # アラート修飾の設定
+  - admonition
+  # スーパーフェンス機能の設定。アラートの内容にコードブロックを埋め込むときに必要
+  #- pymdownx.superfences
+  # コンテンツの折りたたみも可能にする。???で使用可能。
+  #- pymdownx.details
+
+extra_css:
+  - css/extra.css
+
+extra_javascript:
+  - path: https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8
+    async: true
+  - path: js/extra.js
+
+nav:
+  - Home: index.md
+  - ProOperate: prooperate.md
+  - ProFileOperate: profileoperate.md
+  - ProPrintOperate: proprintoperate.md
+
+theme:
+  name: mkdocs
+  custom_dir: themes_mkdocs1.1.2

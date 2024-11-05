@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>ProOperate - PitTouch Pro3 APIリファレンス</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">PitTouch Pro3 APIリファレンス</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="prooperate.html" class="nav-link">ProOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="profileoperate.html" class="nav-link">ProFileOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="proprintoperate.html" class="nav-link">ProPrintOperate</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a rel="prev" href="index.html" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="profileoperate.html" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#prooperate" class="nav-link">ProOperate</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#constructor" class="nav-link">Constructor</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#prooperate_1" class="nav-link">ProOperate()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#members" class="nav-link">Members</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#producttype" class="nav-link">productType</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-_nfc" class="nav-link">Methods - NFC関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#startcommunicationparam" class="nav-link">startCommunication(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#stopcommunication" class="nav-link">stopCommunication()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-_sound" class="nav-link">Methods - sound関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#playsoundparam" class="nav-link">playSound(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#stopsoundparam" class="nav-link">stopSound(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-" class="nav-link">Methods - 端末イベント関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#starteventlistenparam" class="nav-link">startEventListen(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#stopeventlisten" class="nav-link">stopEventListen()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getnetworkstat" class="nav-link">getNetworkStat()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-_1" class="nav-link">Methods - キーパッド関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#startkeypadlistenparam" class="nav-link">startKeypadListen(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#stopkeypadlisten" class="nav-link">stopKeypadListen()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#setkeypaddisplayparam" class="nav-link">setKeypadDisplay(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getkeypaddisplay" class="nav-link">getKeypadDisplay()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#setkeypadledparam" class="nav-link">setKeypadLed(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getkeypadled" class="nav-link">getKeypadLed()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getkeypadconnected" class="nav-link">getKeypadConnected()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-_cgi" class="nav-link">Methods - 外部連携CGI関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#starthttprequestlistenparam" class="nav-link">startHttpRequestListen(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#stophttprequestlisten" class="nav-link">stopHttpRequestListen()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#sendhttpresponseparam" class="nav-link">sendHttpResponse(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-_2" class="nav-link">Methods - 端末情報関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#getterminalid" class="nav-link">getTerminalID()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getfirmwareversion" class="nav-link">getFirmwareVersion()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getcontentssetversion" class="nav-link">getContentsSetVersion()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#methods_-_3" class="nav-link">Methods - 端末管理関連</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#removeallwebsqldb" class="nav-link">removeAllWebSQLDB()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#setdateymdhms" class="nav-link">setDate(y,M,d,h,m,s)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#reboot" class="nav-link">reboot()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#shutdown" class="nav-link">shutdown()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#setdisplaybrightnessparam" class="nav-link">setDisplayBrightness(param)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getdisplaybrightness" class="nav-link">getDisplayBrightness()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#clearsettingpassword" class="nav-link">clearSettingPassword()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="prooperate">ProOperate<a class="headerlink" href="#prooperate" title="Permanent link">&para;</a></h1>
+<p>ProOperateは、以下の機能を提供する</p>
+<ul>
+<li>FeliCa, Type A, Type Bの読み取り</li>
+<li>音声再生</li>
+<li>ネットワークの状態取得、変更イベント通知</li>
+<li>キーパッド(別売り)の制御</li>
+<li>外部HTTPクライアントとの通信（外部連携機能）</li>
+<li>端末のバージョン等の取得、再起動などの制御</li>
+</ul>
+<p>PitTouch Pro3内にはprooperate.jsファイルが内蔵されており、以下のパスで読み込み使用する。</p>
+<pre><code class="language-js">&lt;script src=&quot;/pjf/prooperate.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<div class="toc">
+<ul>
+<li><a href="#prooperate">ProOperate</a></li>
+<li><a href="#constructor">Constructor</a><ul>
+<li><a href="#prooperate_1">ProOperate()</a></li>
+</ul>
+</li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#producttype">productType</a></li>
+</ul>
+</li>
+<li><a href="#methods_-_nfc">Methods - NFC関連</a><ul>
+<li><a href="#startcommunicationparam">startCommunication(param)</a></li>
+<li><a href="#stopcommunication">stopCommunication()</a></li>
+</ul>
+</li>
+<li><a href="#methods_-_sound">Methods - sound関連</a><ul>
+<li><a href="#playsoundparam">playSound(param)</a></li>
+<li><a href="#stopsoundparam">stopSound(param)</a></li>
+</ul>
+</li>
+<li><a href="#methods_-">Methods - 端末イベント関連</a><ul>
+<li><a href="#starteventlistenparam">startEventListen(param)</a></li>
+<li><a href="#stopeventlisten">stopEventListen()</a></li>
+<li><a href="#getnetworkstat">getNetworkStat()</a></li>
+</ul>
+</li>
+<li><a href="#methods_-_1">Methods - キーパッド関連</a><ul>
+<li><a href="#startkeypadlistenparam">startKeypadListen(param)</a></li>
+<li><a href="#stopkeypadlisten">stopKeypadListen()</a></li>
+<li><a href="#setkeypaddisplayparam">setKeypadDisplay(param)</a></li>
+<li><a href="#getkeypaddisplay">getKeypadDisplay()</a></li>
+<li><a href="#setkeypadledparam">setKeypadLed(param)</a></li>
+<li><a href="#getkeypadled">getKeypadLed()</a></li>
+<li><a href="#getkeypadconnected">getKeypadConnected()</a></li>
+</ul>
+</li>
+<li><a href="#methods_-_cgi">Methods - 外部連携CGI関連</a><ul>
+<li><a href="#starthttprequestlistenparam">startHttpRequestListen(param)</a></li>
+<li><a href="#stophttprequestlisten">stopHttpRequestListen()</a></li>
+<li><a href="#sendhttpresponseparam">sendHttpResponse(param)</a></li>
+</ul>
+</li>
+<li><a href="#methods_-_2">Methods - 端末情報関連</a><ul>
+<li><a href="#getterminalid">getTerminalID()</a></li>
+<li><a href="#getfirmwareversion">getFirmwareVersion()</a></li>
+<li><a href="#getcontentssetversion">getContentsSetVersion()</a></li>
+</ul>
+</li>
+<li><a href="#methods_-_3">Methods - 端末管理関連</a><ul>
+<li><a href="#removeallwebsqldb">removeAllWebSQLDB()</a></li>
+<li><a href="#setdateymdhms">setDate(y,M,d,h,m,s)</a></li>
+<li><a href="#reboot">reboot()</a></li>
+<li><a href="#shutdown">shutdown()</a></li>
+<li><a href="#setdisplaybrightnessparam">setDisplayBrightness(param)</a></li>
+<li><a href="#getdisplaybrightness">getDisplayBrightness()</a></li>
+<li><a href="#clearsettingpassword">clearSettingPassword()</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="constructor">Constructor<a class="headerlink" href="#constructor" title="Permanent link">&para;</a></h1>
+<h2 id="prooperate_1">ProOperate()<a class="headerlink" href="#prooperate_1" title="Permanent link">&para;</a></h2>
+<p>ProOperateのシングルトンインスタンスを返す。</p>
+<p>内部的には、ProOperateImplクラスのインスタンスを返しているが、ProOperateImplの直接のnewはせずに、必ずProOperate()を呼び出すこと。</p>
+<pre><code class="language-js">let op = ProOperate();
+op.startCommunication(...);
+</code></pre>
+<h1 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h1>
+<h2 id="producttype">productType<a class="headerlink" href="#producttype" title="Permanent link">&para;</a></h2>
+<p>製品の種類を区別するために使用する。 Pro3では"pro3"。Pro2のProOperateには存在しない(undefined)。</p>
+<pre><code class="language-js">if (ProOperate().productType === &quot;pro3&quot;) {
+    // Pro3
+} else {
+    // Pro2
+}
+</code></pre>
+<h1 id="methods_-_nfc">Methods - NFC関連<a class="headerlink" href="#methods_-_nfc" title="Permanent link">&para;</a></h1>
+<h2 id="startcommunicationparam">startCommunication(param)<a class="headerlink" href="#startcommunicationparam" title="Permanent link">&para;</a></h2>
+<p>非接触ICの検出を開始する。以下を指定するオブジェクトを渡す。</p>
+<ul>
+<li>タッチに反応させるカード種別(FeliCa, Type A, Type B)</li>
+<li>カードからデータを読み出す場合、その情報</li>
+<li>タッチ成功時・失敗時の音声</li>
+<li>タッチイベントのコールバック</li>
+<li>ランプパターン </li>
+</ul>
+<p><strong>例</strong></p>
+<pre><code class="language-js">startCommunication({
+    successSound:&quot;sound/success.wav&quot;,
+    failSound:&quot;sound/fail.wav&quot;,
+    successLampPtn:&quot;500,GGGG&quot;,
+    failLampPtn:&quot;200,R0000R0000&quot;,
+    waitLampPtn:&quot;100,G000000000&quot;,
+    felica:[
+        { systemCode: &quot;FFFF&quot; }
+    ],
+    onEvent:(eventCode, responseObject) =&gt; {
+        if (eventCode == 1) {
+            // 検出処理
+            console.log(&quot;idm=&quot; + responseObject.idm);
+        }
+    }
+})
+</code></pre>
+<p>FeliCa、Type A、Type Bのうち２つ以上を指定している場合は、短い間隔の時分割で検出処理を切り替える。</p>
+<p>検出待ちの間は、<code>waitLampPtn</code>で指定されたパターンでランプ点灯を行う。</p>
+<p>検出・読み取りの成功時は<code>successSound</code>での音声再生と<code>successLampPtn</code>でのランプ点灯を行い、<code>onEvent</code>をeventCode=1で呼び出す。
+検出・読み取りの失敗時は<code>failSound</code>での音声再生と<code>failLampPtn</code>でのランプ点灯を行い、<code>onEvent</code>をeventCode=1で呼び出す。</p>
+<p>eventCode=1での<code>onEvent</code>呼び出し後、非接触ICの消失を検知した際に必ず<code>onEvent</code>をeventCode=0で呼び出す。</p>
+<p>ページ遷移時に自動的にstopCommunication()が呼ばれるため、 ページ遷移後にも非接触IC検出を続けたい場合は再度startCommunication()を呼ぶ必要がある。</p>
+<h3 id="_1">関連ページ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="paramfelica.html">FeliCaの検出と読み取り</a></li>
+<li><a href="parammifare.html">Type A(MIFARE)の検出と読み取り</a></li>
+<li><a href="paramtypeb.html">Type Bの検出と読み取り</a></li>
+<li><a href="paramonevent.html">onEvent</a></li>
+<li><a href="paramlamp.html">ランプパターン</a></li>
+</ul>
+<h3 id="param">param<a class="headerlink" href="#param" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.successSound</td>
+<td>String</td>
+<td>optional<br>省略時"/pjf/sound/success.wav"</td>
+<td>成功時に再生するサウンドファイルパスを指定する(ファイルパスはASCII文字しか使用できず、最大196文字まで)。""を指定した場合は音声を再生しない。</td>
+</tr>
+<tr>
+<td>param.failSound</td>
+<td>String</td>
+<td>optional<br>省略時"/pjf/sound/fail.wav"</td>
+<td>失敗時に再生するサウンドファイルパスを指定する(ファイルパスはASCII文字しか使用できず、最大196文字まで)。""を指定した場合は音声を再生しない。</td>
+</tr>
+<tr>
+<td>param.successLampPtn</td>
+<td>String</td>
+<td>optional</td>
+<td>成功時の<a href="paramlamp.html">ランプパターン</a>。successLampPtnとsuccessLampが共に未指定の場合はデフォルト値が使用される。デフォルトは全てのランプが青色で、全点灯(2秒間)するパターン("500,BBBB")。</td>
+</tr>
+<tr>
+<td>param.successLamp</td>
+<td>String</td>
+<td>optional<br>deprecated</td>
+<td>Pro2互換用。詳細は<a href="paramlamp.html">ランプパターン</a>参照。</td>
+</tr>
+<tr>
+<td>param.failLampPtn</td>
+<td>String</td>
+<td>optional</td>
+<td>失敗時の<a href="paramlamp.html">ランプパターン</a>。failLampPtnとfailLampが共に未指定の場合はデフォルト値が使用される。デフォルトは全てのランプが赤色で素早く点滅(2秒間)するパターン("100,R0R0R0R0R0R0R0R0R0R0")。</td>
+</tr>
+<tr>
+<td>param.failLamp</td>
+<td>String</td>
+<td>optional<br>deprecated</td>
+<td>Pro2互換用。詳細は<a href="paramlamp.html">ランプパターン</a>参照。</td>
+</tr>
+<tr>
+<td>param.waitLampPtn</td>
+<td>String</td>
+<td>optional</td>
+<td>タッチ待ち受け時の<a href="paramlamp.html">ランプパターン</a>。waitLampPtnとwaitLampが共に未指定の場合はデフォルト値が使用される。デフォルトは全てのランプが緑色でゆっくり点滅するパターン("100,G000000000")。</td>
+</tr>
+<tr>
+<td>param.waitLamp</td>
+<td>String</td>
+<td>optional<br>deprecated</td>
+<td>Pro2互換用。詳細は<a href="paramlamp.html">ランプパターン</a>参照。</td>
+</tr>
+<tr>
+<td>param.felica</td>
+<td>Array&lt;<a href="paramfelica.html#felica_1">FeliCaパラメータオブジェクト</a>&gt;</td>
+<td>optional</td>
+<td>非接触IC検出のターゲットをFeliCaとする。mifare、typeBと同時指定可能。配列には<a href="paramfelica.html#felica_1">FeliCaパラメータオブジェクト</a>を指定(最大4つ)。</td>
+</tr>
+<tr>
+<td>param.mifare</td>
+<td>Array&lt;<a href="parammifare.html#mifare">MIFAREパラメータオブジェクト</a>&gt;</td>
+<td>optional</td>
+<td>非接触IC検出のターゲットをType A(MIFARE)とする。felica、typeBと同時指定可能。配列には<a href="parammifare.html#mifare">MIFAREパラメータオブジェクト</a>を指定(最大3つ)。</td>
+</tr>
+<tr>
+<td>param.typeB</td>
+<td>boolean</td>
+<td>optional<br>省略時false</td>
+<td>非接触IC検出のターゲットをType Bとする。felica,mifareと同時指定可能。</td>
+</tr>
+<tr>
+<td>param.onetime</td>
+<td>boolean</td>
+<td>optional<br>省略時false</td>
+<td>trueが指定された場合、非接触ICの消失検出後、結果を通知して検出動作を終了する。falseが指定された場合、連続して非接触ICの検出を行う。</td>
+</tr>
+<tr>
+<td>param.onEvent</td>
+<td>Function({Number}eventCode, {Object}responseObject)</td>
+<td>optional</td>
+<td>読み取り結果を<a href="paramonevent.html">onEvent</a>で通知する。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return">return<a class="headerlink" href="#return" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>指定した音声ファイルが存在しない</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h3 id="throw">throw<a class="headerlink" href="#throw" title="Permanent link">&para;</a></h3>
+<p>引数パラメータに誤りがある場合例外をthrowする。</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{name:errorInfo, message:paramName}</td>
+<td>Object</td>
+<td>引数パラメータに誤りがあることを表す例外。paramNameには<code>param.felica[0].service[1].serviceCode</code>のように、誤りがあったパラメータ名が入る。</td>
+</tr>
+</tbody>
+</table>
+<p>errorInfoには以下の文字列が入る。</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Invalid format"</td>
+<td>パラメータフォーマットエラー(使用不可能な文字が含まれている等)。</td>
+</tr>
+<tr>
+<td>"Size over"</td>
+<td>パラメータサイズ超過。</td>
+</tr>
+<tr>
+<td>"Range over"</td>
+<td>パラメータ値の範囲オーバー。</td>
+</tr>
+<tr>
+<td>"Invalid file path"</td>
+<td>サウンドファイルパス指定方法不正(ルートの上位ディレクトリを参照しようとしている)。</td>
+</tr>
+<tr>
+<td>"Too many array elements"</td>
+<td>配列要素数が多すぎる。</td>
+</tr>
+<tr>
+<td>"Invalid data type"</td>
+<td>データ型不正</td>
+</tr>
+<tr>
+<td>"Missing required parameter"</td>
+<td>必須パラメータ不足</td>
+</tr>
+<tr>
+<td>"Invalid target combination"</td>
+<td>非接触ICのターゲット指定が無い</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stopcommunication">stopCommunication()<a class="headerlink" href="#stopcommunication" title="Permanent link">&para;</a></h2>
+<p>非接触IC検出を終了する。</p>
+<p>ページ遷移時に自動的に実行されるため、任意のタイミングで終了したい場合以外は呼ぶ必要はない。</p>
+<h3 id="return_1">return<a class="headerlink" href="#return_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="methods_-_sound">Methods - sound関連<a class="headerlink" href="#methods_-_sound" title="Permanent link">&para;</a></h1>
+<h2 id="playsoundparam">playSound(param)<a class="headerlink" href="#playsoundparam" title="Permanent link">&para;</a></h2>
+<p>指定された音声の再生を開始する。</p>
+<p>音声の再生開始が可能な場合、その音声のIDとなるsoundID（正の値）が返る。stopSound()にsoundIDを渡すと再生を停止できる。</p>
+<p>このAPIを複数回呼び出すことで、最大３つの音声まで同時再生可能。音声が再生されている間にWebページが次のページへ遷移した場合でも、再生は停止しない。  </p>
+<p>音声のフォーマットや制限事項については、デベロッパーマニュアルを参照。</p>
+<h3 id="param_1">param<a class="headerlink" href="#param_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td></td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.filePath</td>
+<td>String</td>
+<td></td>
+<td>再生するサウンドファイルパスを指定する(ファイルパスはASCII文字しか使用できず、最大196文字まで)。</td>
+</tr>
+<tr>
+<td>param.loop</td>
+<td>boolean</td>
+<td>optional<br>省略時false</td>
+<td>ループ再生するかどうかを指定する。Webページ遷移後も音声は停止しないため、ループ再生の場合は明示的にstopSound()を呼び出さない限り音声は停止しない。</td>
+</tr>
+<tr>
+<td>param.onEvent</td>
+<td>Function({Number}eventCode)</td>
+<td>optional<br>省略時true</td>
+<td>音声の再生処理が開始された時に呼ばれる。音声再生が終了した通知ではないことに注意。ループ再生時や、stopSound()で既に音声を停止している場合にはこのイベントは通知されない。eventCodeは常に0。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_2">return<a class="headerlink" href="#return_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>音声のID(&gt;0)</td>
+<td>Number</td>
+<td>成功（音声の再生開始が可能）</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>指定したファイルが存在しない</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>ファイルフォーマット不正</td>
+</tr>
+<tr>
+<td>-4</td>
+<td>Number</td>
+<td>同時再生最大数に到達</td>
+</tr>
+<tr>
+<td>-5</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stopsoundparam">stopSound(param)<a class="headerlink" href="#stopsoundparam" title="Permanent link">&para;</a></h2>
+<p>指定された再生中の音声を停止する。playSound()の戻り値であるsoundIDを指定する。</p>
+<p>soundIDが指定されなかった場合は、再生中の全ての音声を停止する。 音声は即座には停止されないため、注意する必要がある。</p>
+<h3 id="param_2">param<a class="headerlink" href="#param_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.soundID</td>
+<td>Number</td>
+<td>optional</td>
+<td>停止する音声のID(&gt;0)。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_3">return<a class="headerlink" href="#return_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>指定したsoundIDの音声が存在しない</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h1 id="methods_-">Methods - 端末イベント関連<a class="headerlink" href="#methods_-" title="Permanent link">&para;</a></h1>
+<h2 id="starteventlistenparam">startEventListen(param)<a class="headerlink" href="#starteventlistenparam" title="Permanent link">&para;</a></h2>
+<p>端末のネットワーク状態の変更イベントの受け取りを開始する。</p>
+<p>PitTouch Pro3のネットワーク状態の変更イベントを受け取るコールバックを登録する。</p>
+<p>ページ遷移時に自動的にstopEventListen()が呼ばれるため、ページ遷移後にもイベントの受け取りを続けたい場合は再度startEventListen()を呼ぶ必要がある。</p>
+<h3 id="param_3">param<a class="headerlink" href="#param_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.onEvent</td>
+<td>Function({Number}eventCode)</td>
+<td>optional</td>
+<td>イベントを通知する。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_4">return<a class="headerlink" href="#return_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+</tbody>
+</table>
+<p><strong>eventCode</strong></p>
+<p>onEventに通知されるeventCodeは以下の通り。</p>
+<table>
+<thead>
+<tr>
+<th>eventCode</th>
+<th>イベントの内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ネットワークが切断された</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ネットワークが通信モジュール接続に切り替わった</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ネットワークがLAN接続に切り替わった</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ネットワークが無線LAN接続に切り替わった</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stopeventlisten">stopEventListen()<a class="headerlink" href="#stopeventlisten" title="Permanent link">&para;</a></h2>
+<p>端末のネットワーク状態の変更イベントの受け取りを終了する。</p>
+<p>ページ遷移時に自動的に実行されるため、明示的にイベントの受け取りを終了したい場合以外は呼ぶ必要はない。</p>
+<h3 id="return_5">return<a class="headerlink" href="#return_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getnetworkstat">getNetworkStat()<a class="headerlink" href="#getnetworkstat" title="Permanent link">&para;</a></h2>
+<p>端末のネットワーク状態を取得する。</p>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
+<p>startEventListen()で通知されるeventCodeとは値は異なる。</p>
+</div>
+<h3 id="return_6">return<a class="headerlink" href="#return_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>未接続</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Number</td>
+<td>通信モジュールで接続中</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Number</td>
+<td>LANで接続中</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Number</td>
+<td>無線LANで接続中</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h1 id="methods_-_1">Methods - キーパッド関連<a class="headerlink" href="#methods_-_1" title="Permanent link">&para;</a></h1>
+<p>PitTouch Pro3に接続できる専用のキーパッド(別売り)の制御を行う。</p>
+<h2 id="startkeypadlistenparam">startKeypadListen(param)<a class="headerlink" href="#startkeypadlistenparam" title="Permanent link">&para;</a></h2>
+<p>キーパッドのイベントの受け取りを開始する。</p>
+<p>ページ遷移時に自動的にstopKeypadListen()が呼ばれるため、 ページ遷移後にもイベントの受け取りを続けたい場合は再度startKeypadListen()を呼ぶ必要がある。</p>
+<p><strong>キーコード</strong></p>
+<table>
+<thead>
+<tr>
+<th>キー</th>
+<th>キーコード</th>
+<th>キー</th>
+<th>キーコード</th>
+<th>キー</th>
+<th>キーコード</th>
+<th>キー</th>
+<th>キーコード</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F1</code></td>
+<td>112 ('p')</td>
+<td><code>F2</code></td>
+<td>113 ('q')</td>
+<td><code>F3</code></td>
+<td>114 ('r')</td>
+<td><code>F4</code></td>
+<td>115 ('s')</td>
+</tr>
+<tr>
+<td><code>7</code></td>
+<td>55 ('7')</td>
+<td><code>8</code></td>
+<td>56 ('8')</td>
+<td><code>9</code></td>
+<td>57 ('9')</td>
+<td><code>終了</code></td>
+<td>111 ('o')</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>52 ('4')</td>
+<td><code>5</code></td>
+<td>53 ('5')</td>
+<td><code>6</code></td>
+<td>54 ('6')</td>
+<td><code>戻る</code></td>
+<td>109 ('m')</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>49 ('1')</td>
+<td><code>2</code></td>
+<td>50 ('2')</td>
+<td><code>3</code></td>
+<td>51 ('3')</td>
+<td><code>決定</code></td>
+<td>13 ('\r')</td>
+</tr>
+<tr>
+<td><code>クリア</code></td>
+<td>106 ('j')</td>
+<td><code>0</code></td>
+<td>48 ('0')</td>
+<td><code>00</code></td>
+<td>58 (':')</td>
+<td><code>次へ</code></td>
+<td>107 ('k')</td>
+</tr>
+</tbody>
+</table>
+<h3 id="param_4">param<a class="headerlink" href="#param_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.onKeyDown</td>
+<td>Function({Number}keycode)</td>
+<td>optional</td>
+<td>キーが押されたことを通知するコールバック関数。</td>
+</tr>
+<tr>
+<td>param.onKeyUp</td>
+<td>Function({Number}keycode)</td>
+<td>optional</td>
+<td>キーが離されたことを通知するコールバック関数。</td>
+</tr>
+<tr>
+<td>param.onEvent</td>
+<td>Function({Number}eventCode)</td>
+<td>optional</td>
+<td>キーパッドの挿抜イベントを通知するコールバック関数。eventCodeは接続時は1、切断時に0。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_7">return<a class="headerlink" href="#return_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stopkeypadlisten">stopKeypadListen()<a class="headerlink" href="#stopkeypadlisten" title="Permanent link">&para;</a></h2>
+<p>キーパッドのイベントの受け取りを終了する。</p>
+<p>ページ遷移時に自動的に実行されるため、明示的にイベントの受け取りを終了したい場合以外は呼ぶ必要はない。</p>
+<h3 id="return_8">return<a class="headerlink" href="#return_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setkeypaddisplayparam">setKeypadDisplay(param)<a class="headerlink" href="#setkeypaddisplayparam" title="Permanent link">&para;</a></h2>
+<p>キーパッドのLCDに指定した文字列を表示する。</p>
+<p>LCDには2行分の表示領域があり、firstLineとsecondLineで指定する。firstLineとsecondLineの仕様は以下の通り。</p>
+<ul>
+<li>各行16文字まで。利用可能な文字はデベロッパーマニュアル参照。</li>
+<li>左詰で表示、16文字以上の場合は、超えた分を無視する。</li>
+<li>""を指定した場合は表示を消去する。</li>
+<li>不正な文字(2byte文字など)がある場合は、行ごと表示しない。</li>
+<li><code>\</code>を表示する場合は、<code>\</code>でエスケープする(<code>\\</code>で<code>\</code>と表示される)。</li>
+<li>指定がない場合は、現在表示している文字列を表示したままにする。</li>
+</ul>
+<h3 id="param_5">param<a class="headerlink" href="#param_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.firstLine</td>
+<td>String</td>
+<td>optional</td>
+<td>1行目に表示する文字列を指定する。省略時は現在表示している文字列を表示したままにする。</td>
+</tr>
+<tr>
+<td>param.secondLine</td>
+<td>String</td>
+<td>optional</td>
+<td>2行目に表示する文字列を指定する。省略時は現在表示している文字列を表示したままにする。</td>
+</tr>
+<tr>
+<td>param.backLight</td>
+<td>boolean</td>
+<td>optional<br>省略時true</td>
+<td>文字を表示する際にLCDバックライトを点灯するか、指定する(true=ON、false=OFF)。LCDバックライトは30秒で自動消灯する。既にLCDバックライト点灯中に、再度点灯(true)で指定された場合は、タイマーがリセットされ、そこから30秒で自動消灯する。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_9">return<a class="headerlink" href="#return_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>キーパッド未接続</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getkeypaddisplay">getKeypadDisplay()<a class="headerlink" href="#getkeypaddisplay" title="Permanent link">&para;</a></h2>
+<p>キーパッドのLCDに表示されている文字列を取得する。</p>
+<h3 id="return_10">return<a class="headerlink" href="#return_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{firstLine:1行目の文字列, secondLine:2行目の文字列}</td>
+<td>Object</td>
+<td>LCDに表示されている文字列</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>キーパッド未接続</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setkeypadledparam">setKeypadLed(param)<a class="headerlink" href="#setkeypadledparam" title="Permanent link">&para;</a></h2>
+<p>キーパッドのLEDの点灯/消灯を指定する。</p>
+<p>6箇所のLEDのON/OFFを6個の0/1で指定する。</p>
+<table>
+<thead>
+<tr>
+<th>1文字目</th>
+<th>2文字目</th>
+<th>3文字目</th>
+<th>4文字目</th>
+<th>5文字目</th>
+<th>6文字目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F1</code></td>
+<td><code>F2</code></td>
+<td><code>F3</code></td>
+<td><code>F4</code></td>
+<td><code>決定</code></td>
+<td><code>次へ</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>例</strong></p>
+<pre><code class="language-js">// F2キーだけを点灯する
+ProOperate().setKeypadLed({light: &quot;010000&quot;})
+</code></pre>
+<h3 id="param_6">param<a class="headerlink" href="#param_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ。未指定の場合は、各パラメータがデフォルト値として実行される。</td>
+</tr>
+<tr>
+<td>param.light</td>
+<td>String</td>
+<td>optional<br>未指定時は"000000"</td>
+<td>6箇所のLEDのON/OFFをビットで表した文字列。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_11">return<a class="headerlink" href="#return_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>キーパッド未接続</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getkeypadled">getKeypadLed()<a class="headerlink" href="#getkeypadled" title="Permanent link">&para;</a></h2>
+<p>キーパッドのLEDの現在の点灯/消灯状態を取得する。</p>
+<h3 id="return_12">return<a class="headerlink" href="#return_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LEDパターン文字列</td>
+<td>String</td>
+<td>"000000"など</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>キーパッド未接続</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getkeypadconnected">getKeypadConnected()<a class="headerlink" href="#getkeypadconnected" title="Permanent link">&para;</a></h2>
+<p>キーパッドの接続状態を取得する。</p>
+<h3 id="return_13">return<a class="headerlink" href="#return_13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Number</td>
+<td>接続中</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>未接続</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h1 id="methods_-_cgi">Methods - 外部連携CGI関連<a class="headerlink" href="#methods_-_cgi" title="Permanent link">&para;</a></h1>
+<p>外部連携CGI機能とは、PC等の外部のHTTPクライアントからコンテンツセットにデータをPOSTで渡し、
+レスポンスデータをコンテンツセットからHTTPクライアントに返すことができる機能である。</p>
+<p>以下のフローで動作する。</p>
+<ol>
+<li>コンテンツセットはstartHttpRequestListen()で接続を待ち受け、onEventコールバックを登録する。</li>
+<li>HTTPクライアント(外部機器)から <code>http://[PitTouch Pro3のアドレス]:3951/ex/index.cgi</code> にアクセス。POSTでデータを渡す。</li>
+<li>onEventコールバックにPOSTされたデータが渡される。</li>
+<li>sendHttpResponse()にレスポンスデータを渡す。timeout時間内にsendHttpResponse()を呼ばなかった場合はHTTPクライアントにエラーが返る。</li>
+<li>HTTPクライアントにレスポンスデータが返る。</li>
+</ol>
+<p><strong>HTTPリクエスト</strong></p>
+<p>HTTPクライアントは、以下のアクセスを行うこと。</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td>http://[PitTouch Pro3のアドレス]:3951/ex/index.cgi</td>
+</tr>
+<tr>
+<td>method</td>
+<td>POST</td>
+</tr>
+<tr>
+<td>認証</td>
+<td>Digest認証 (Web設定ページと同じusername/password)</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>コンテンツセットに渡すデータ(utf-8)。最大1KB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTPレスポンス</strong></p>
+<p>HTTPレスポンスは</p>
+<ul>
+<li>ステータスコード: 200</li>
+<li>Content-Type: text/plain; charset=utf-8</li>
+</ul>
+<p>として返る。レスポンスボディは以下が&amp;区切りで接続されたものになる。</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>resultcode</td>
+<td>結果コード<br/>0:正常終了<br/>1:レスポンスがタイムアウトした<br/>2:別クライアント接続中<br/>3:startHttpRequestListen()がコールされていない<br/>4:クエリ最大サイズオーバー<br/>6:メソッド不正<br/>99:内部エラー</td>
+</tr>
+<tr>
+<td>remaintimeout</td>
+<td>現在受け付けられている（レスポンス待ちの）リクエストがタイムアウトするまでの時間（秒）。resultcodeが2の場合のみ含まれる</td>
+</tr>
+<tr>
+<td>data</td>
+<td>コンテンツセットがsendHttpResponse()を呼び出して渡したデータ。最大2MB。resultcodeが0の場合のみ含まれる。</td>
+</tr>
+</tbody>
+</table>
+<p>同時に接続できるHTTPクライアントは1つのみ。他のクライアントが接続中の場合は<code>resultcode=2</code>と<code>remaintimeout=N</code>が返る。
+コンテンツセットはtimeout時間内にsendHttpResponse()でレスポンスを返す必要があるが、<code>remaintimeout</code>はその残り時間である。
+つまり、最大<code>remaintimeout</code>秒待つことで、次のクライアントの接続が可能となる。</p>
+<p><strong>例</strong></p>
+<p>コンテンツセットがsendHttpResponse()で<code>num%3D1234</code>を渡した(num=1234をURLエンコードしたもの)。</p>
+<pre><code class="language-js">resultcode=0&amp;data=num%3D1234
+</code></pre>
+<p>他のクライアントが接続中。残りタイムアウトは3秒。</p>
+<pre><code class="language-js">resultcode=2&amp;remaintimeout=3
+</code></pre>
+<h2 id="starthttprequestlistenparam">startHttpRequestListen(param)<a class="headerlink" href="#starthttprequestlistenparam" title="Permanent link">&para;</a></h2>
+<p>外部のHTTPクライアントからのリクエストの待ち受けを開始する。外部のHTTPクライアントからリクエストが来た時、リクエスト内容をonEventで通知する。</p>
+<p>ページ遷移時には自動的にstopHttpRequestListen()が呼ばれるため、リクエストの待ち受けは解除される。</p>
+<p>onEventには以下の２つのキーを持つオブジェクトが渡される。</p>
+<ul>
+<li>ip (String): 接続元のIPアドレス</li>
+<li>query (String): POSTされたBodyデータ。queryにはリクエストのBodyがそのまま渡され、URLデコードなどは行われない。最大1024byte。 例) "a=1&amp;b=hello&amp;ccc=world"</li>
+</ul>
+<h3 id="param_7">param<a class="headerlink" href="#param_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td></td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.onEvent</td>
+<td>Function({Object})</td>
+<td></td>
+<td>外部のHTTPクライアントからのリクエストを通知する。</td>
+</tr>
+<tr>
+<td>param.timeout</td>
+<td>Number</td>
+<td>optional<br>省略時5</td>
+<td>外部のHTTPクライアントからリクエストが来た際の、レスポンスを返すまでのタイムアウト時間を秒単位で指定する(1～120)。リクエストを受信してからこの時間が経過するまでの間に、sendHttpResponse()を用いてレスポンスを返すことができる。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_14">return<a class="headerlink" href="#return_14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stophttprequestlisten">stopHttpRequestListen()<a class="headerlink" href="#stophttprequestlisten" title="Permanent link">&para;</a></h2>
+<p>外部のHTTPクライアントからのリクエストの待ち受けを終了する。</p>
+<p>ページ遷移時に自動的に実行される。</p>
+<h3 id="return_15">return<a class="headerlink" href="#return_15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sendhttpresponseparam">sendHttpResponse(param)<a class="headerlink" href="#sendhttpresponseparam" title="Permanent link">&para;</a></h2>
+<p>外部のHTTPクライアントからのリクエストに対するレスポンスを送信する。</p>
+<p>レスポンスを送信するためには、startHttpRequestListen()実行後にリクエストを受信してから、そのリクエストがタイムアウトするまでの間にこのAPIを実行する必要がある。タイムアウト時間内に呼ばないと、クライアントにはresulecode=1のエラーが返る。</p>
+<p>レスポンスを送信する（もしくはタイムアウトする）と、外部のHTTPクライアントとのHTTP通信は終了する。</p>
+<p><strong>例</strong></p>
+<pre><code class="language-js">let op = ProOperate();
+op.startHttpRequestListen({onEvent:(ev) =&gt; {
+    console.log(&quot;ip=&quot; + ev.ip);
+    console.log(&quot;received=&quot; + ev.query);
+    // &quot;resulecode=0&amp;data=hello%20world&quot;が送られる
+    sendHttpResponse({data: encodeURIComponent(&quot;hello world&quot;)});        
+}});
+</code></pre>
+<h3 id="param_8">param<a class="headerlink" href="#param_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td>optional</td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.data</td>
+<td>String</td>
+<td>optional<br>省略時""</td>
+<td>外部のHTTPクライアントからのリクエストに対するレスポンスとして送信するデータ文字列(UTF-8に変換後、最大2Mbyteまで)。この文字列はそのままレスポンスに使用されるので、必要に応じてURLエンコードなどを行うこと。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_16">return<a class="headerlink" href="#return_16" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>レスポンス待ちのリクエストが存在しない</td>
+</tr>
+<tr>
+<td>-3</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h1 id="methods_-_2">Methods - 端末情報関連<a class="headerlink" href="#methods_-_2" title="Permanent link">&para;</a></h1>
+<h2 id="getterminalid">getTerminalID()<a class="headerlink" href="#getterminalid" title="Permanent link">&para;</a></h2>
+<p>端末IDを取得する。</p>
+<h3 id="return_17">return<a class="headerlink" href="#return_17" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>端末ID</td>
+<td>String</td>
+<td>8文字の数字。例:"01003000"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getfirmwareversion">getFirmwareVersion()<a class="headerlink" href="#getfirmwareversion" title="Permanent link">&para;</a></h2>
+<p>ファームウェアのバージョンを取得する。</p>
+<p>ファームウェアバージョンのフォーマットは以下。</p>
+<pre><code>XX.XXYYYrZZZZZZZ
+(例)1.00b01rd9fae7a, 1.00rd9fae7a
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>値</th>
+<th>内容</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XX.XX</td>
+<td>ファームウェアバージョン(数字)。 整数部がメジャーバージョン、小数部がマイナーバージョンを表す。</td>
+<td>"1.00", "8.53", "11.23"</td>
+</tr>
+<tr>
+<td>YYY</td>
+<td>バージョン接尾語</td>
+<td>"b01"など。YYY部分が存在しない場合もある。</td>
+</tr>
+<tr>
+<td>ZZZZZZZ</td>
+<td>リビジョン番号。0-9,a-fの文字。最大7文字。</td>
+<td>"d9fae7a"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_18">return<a class="headerlink" href="#return_18" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ファームウェアバージョン</td>
+<td>String</td>
+<td>例:"1.00b01rd9fae7a"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getcontentssetversion">getContentsSetVersion()<a class="headerlink" href="#getcontentssetversion" title="Permanent link">&para;</a></h2>
+<p>コンテンツセットのinfo.jsonに記載されたバージョンを取得する。</p>
+<h3 id="return_19">return<a class="headerlink" href="#return_19" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コンテンツセットバージョン</td>
+<td>String</td>
+<td>コンテンツセットバージョン</td>
+</tr>
+</tbody>
+</table>
+<h1 id="methods_-_3">Methods - 端末管理関連<a class="headerlink" href="#methods_-_3" title="Permanent link">&para;</a></h1>
+<h2 id="removeallwebsqldb">removeAllWebSQLDB()<a class="headerlink" href="#removeallwebsqldb" title="Permanent link">&para;</a></h2>
+<p>WebSQLデータベースファイルを全て削除する。</p>
+<p>データベースを削除しても、データベースファイルは削除されないため、容量が減らない場合がある。 ディスク容量を空けるためにはこのAPIを実行する必要がある。</p>
+<p>このAPIを実行した後、ページ遷移(リロード含む)後からopenDatabase()によって新たなデータベースを作成することができる。</p>
+<h2 id="setdateymdhms">setDate(y,M,d,h,m,s)<a class="headerlink" href="#setdateymdhms" title="Permanent link">&para;</a></h2>
+<p>PitTouch Pro3の日時を設定する。</p>
+<h3 id="param_9">param<a class="headerlink" href="#param_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>y</td>
+<td>Number</td>
+<td></td>
+<td>設定する日時の"年"を2010~2037の範囲で指定する。</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Number</td>
+<td></td>
+<td>設定する日時の"月"を1~12の範囲で設定する。</td>
+</tr>
+<tr>
+<td>d</td>
+<td>Number</td>
+<td></td>
+<td>設定する日時の"日"を1~31の範囲で指定する。</td>
+</tr>
+<tr>
+<td>h</td>
+<td>Number</td>
+<td></td>
+<td>設定する日時の"時"を0~23の範囲で指定する。</td>
+</tr>
+<tr>
+<td>m</td>
+<td>Number</td>
+<td></td>
+<td>設定する日時の"分"を0~59の範囲で指定する。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Number</td>
+<td></td>
+<td>設定する日時の"秒"を0~59の範囲で指定する。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_20">return<a class="headerlink" href="#return_20" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>システムビジー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reboot">reboot()<a class="headerlink" href="#reboot" title="Permanent link">&para;</a></h2>
+<p>再起動を行う。</p>
+<p>実行後、PitTouch Pro3が再起動される。 ファームウェア自動更新やコンテンツセット自動更新を「する」に設定している場合は、再起動の前に自動更新が行われる。 自動更新時、更新完了やエラー表示は行わない。
+また、ファームウェア自動更新やコンテンツセット自動更新を両方「する」に設定している場合、ファームウェア自動更新を先に行う。 この際、ファームウェア自動更新に失敗した場合はコンテンツセット更新は行わない。</p>
+<h3 id="return_21">return<a class="headerlink" href="#return_21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>別処理中で再起動不可</td>
+</tr>
+</tbody>
+</table>
+<h2 id="shutdown">shutdown()<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h2>
+<p>シャットダウンを行い、電源をOFFにする。</p>
+<p>実行後、Pittouch Pro3の電源がOFFになる。 ファームウェア自動更新やコンテンツセット自動更新を「する」に設定している場合は、シャットダウンの前に自動更新が行われる。 自動更新時、更新完了やエラー表示は行わない。
+また、ファームウェア自動更新やコンテンツセット自動更新を両方「する」に設定している場合、ファームウェア自動更新を先に行う。 この際、ファームウェア自動更新に失敗した場合はコンテンツセット更新は行わない。</p>
+<h3 id="return_22">return<a class="headerlink" href="#return_22" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>Number</td>
+<td>別処理中でシャットダウン不可</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setdisplaybrightnessparam">setDisplayBrightness(param)<a class="headerlink" href="#setdisplaybrightnessparam" title="Permanent link">&para;</a></h2>
+<p>液晶タッチパネルの明るさを、0～255の256段階で変更する。 0が最も暗く、255が最も明るい。(明るさを0に変更しても、液晶タッチパネルの表示が完全に見えなくなるわけではない。)
+なお、このAPIを利用して液晶タッチパネルの明るさを変更しても、本体設定やWeb設定ページから設定された明るさ設定は変更されない。
+また、ページ遷移した場合や、電源ボタンを押して機能選択画面に移行した場合は、液晶タッチパネルは本体設定やWeb設定ページから設定された明るさに戻る。</p>
+<p>本体設定やWebページでの明るさ設定(1-5)と本APIでの指定値の関係は以下の通り。</p>
+<table>
+<thead>
+<tr>
+<th>本体設定やWebページでの設定値</th>
+<th>本APIでの指定値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>29</td>
+</tr>
+<tr>
+<td>2</td>
+<td>46</td>
+</tr>
+<tr>
+<td>3</td>
+<td>68</td>
+</tr>
+<tr>
+<td>4</td>
+<td>102</td>
+</tr>
+<tr>
+<td>5</td>
+<td>145</td>
+</tr>
+</tbody>
+</table>
+<h3 id="param_10">param<a class="headerlink" href="#param_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Attributes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param</td>
+<td>Object</td>
+<td></td>
+<td>パラメータ</td>
+</tr>
+<tr>
+<td>param.value</td>
+<td>Number</td>
+<td></td>
+<td>明るさを0～255の範囲で指定する。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return_23">return<a class="headerlink" href="#return_23" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Number</td>
+<td>引数エラー</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getdisplaybrightness">getDisplayBrightness()<a class="headerlink" href="#getdisplaybrightness" title="Permanent link">&para;</a></h2>
+<p>液晶タッチパネルの明るさを、0～255の256段階で取得する。 このAPIを利用して取得される値はその時点での液晶タッチパネルの明るさで、本体設定やWeb設定ページから設定された明るさとは異なることがある。</p>
+<h3 id="return_24">return<a class="headerlink" href="#return_24" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>明るさの値</td>
+<td>Number</td>
+<td>0〜255</td>
+</tr>
+</tbody>
+</table>
+<h2 id="clearsettingpassword">clearSettingPassword()<a class="headerlink" href="#clearsettingpassword" title="Permanent link">&para;</a></h2>
+<p>設定パスワードをクリアする。</p>
+<p>クリア後のパスワードは、oem_default.txtがあればその値になる。 oem_default.txtがない、あるいはoem_default.txtにパスワード設定がない場合は、工場出荷時設定の値になる。</p>
+<h3 id="return_25">return<a class="headerlink" href="#return_25" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>成功</td>
+</tr>
+</tbody>
+</table></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright © 2024 Smart Solution Technology, Inc.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8" defer></script>
+        <script src="js/extra.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

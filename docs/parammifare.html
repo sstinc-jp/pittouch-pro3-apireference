@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Type A(MIFARE)の検出と読み取り - PitTouch Pro3 APIリファレンス</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/extra.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">PitTouch Pro3 APIリファレンス</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="prooperate.html" class="nav-link">ProOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="profileoperate.html" class="nav-link">ProFileOperate</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="proprintoperate.html" class="nav-link">ProPrintOperate</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#type_amifare" class="nav-link">Type A(MIFARE)の検出と読み取り</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">検出フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">読み取りフェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">消失検出フェーズ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#mifare" class="nav-link">MIFAREパラメータオブジェクト</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#mifare_1" class="nav-link">MIFARE読み取りオブジェクト</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="type_amifare">Type A(MIFARE)の検出と読み取り<a class="headerlink" href="#type_amifare" title="Permanent link">&para;</a></h1>
+<p>MIFARE(Classic 1K/4K、UltraLight)のUID取得とデータ読み出し、その他のType AのUIDの取得を行うことができる。</p>
+<p>MIFAREパラメータオブジェクトでは、対象のMIFAREカードを<code>type</code>で指定し、
+またそのカードからデータを読み取る場合はMIFARE読み取りオブジェクトを<code>readData</code>に指定する。</p>
+<pre><code>mifare:[ // MIFAREパラメータオブジェクト
+  {
+    type: 1, // 1:Classic 1K
+    readData: [ // MIFARE読み取りオブジェクト
+      { address: &quot;01&quot;, keyType: 1, keyValue: &quot;001122334455&quot; },
+      { address: &quot;02&quot;, keyType: 1, keyValue: &quot;66778899AABB&quot; },
+    ]
+  },
+  {
+    type: 2, // 2:Classic 4K
+    readData: [ // MIFARE読み取りオブジェクト
+      { address: &quot;03&quot;, keyType: 1, keyValue: &quot;0123456789AB&quot; },
+      { address: &quot;04&quot;, keyType: 2, keyValue: &quot;CDEF01234567&quot; },
+    ]
+  }
+]
+</code></pre>
+<p>MIFAREパラメータオブジェクトは最大3つ指定可能。
+MIFAREを検出したときに、指定した順にマッチングが行われ、最初にマッチしたMIFAREパラメータオブジェクトが使われる。
+いずれのMIFAREパラメータオブジェクトにもマッチしなかった場合は、「その他のType A」として検出される。</p>
+<p>Type Aの処理は、検出フェーズ→読み取りフェーズ→消失検出フェーズ の順に行われる。</p>
+<div class="admonition warning">
+<p class="admonition-title">FeliCaとType Aを同時に検出する設定にした場合</p>
+<p>NFC対応スマートフォンの一部の機種では、かざすタイミングによってFeliCa／Type Aのどちらか一方が検出される。
+Type Aとして検出された場合は「その他のType A」として検出され、UIDはNFCの仕様によりランダムな値になっている場合がある。
+「その他のType A」が検出された場合、startCommunicationをFeliCaのみの設定で再度行うことで、NFCスマホをFeliCaとして検出することができる。</p>
+</div>
+<h2 id="_1">検出フェーズ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>検出時、WUPA応答後Activationを行い、カードの情報を取得する。
+その後、カードがMIFAREパラメータオブジェクトにマッチするかを先頭から順に調べる。</p>
+<p>マッチする条件は以下</p>
+<ul>
+<li><code>type</code>で指定した種別がカード種別と一致</li>
+<li><code>readData</code>(MIFARE読み取りオブジェクト)が指定されている場合、<code>readData</code>のすべての鍵で認証成功</li>
+</ul>
+<p>マッチするMIFAREパラメータオブジェクトの有無にかからわず、検出後は読み取りフェーズに移行する。
+検出フェーズ中に通信エラーが発生した場合は、カードを無視する。</p>
+<h2 id="_2">読み取りフェーズ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>マッチするMIFAREパラメータオブジェクトが見つからなかった場合は、「その他のType A」として<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれ消失検出フェーズに移行する。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    // paramResultなし:その他のType A
+    idm: &quot;00112233445566&quot; // UID
+})
+</code></pre>
+<p>マッチした場合で<code>readData</code>が指定されていない場合は、<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれ消失検出フェーズに移行する。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    paramResult: 1, // 何番目のMIFAREパラメータオブジェクトにマッチしたか
+    idm: &quot;00112233445566&quot; // UID
+})
+</code></pre>
+<p><code>readData</code>でMIFARE読み取りオブジェクトの指定がある場合、readコマンドを使いデータの読み取りを行う。</p>
+<p>認証が必要なカード(Classic 1K, Classic 4K)の場合、readコマンドに先立ちそのアドレスの鍵で認証を行う
+(検出時に鍵の確認のために一度行っているが、再度行う)。</p>
+<p>データ読み出しに成功すると、<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれ、読み取りデータが渡される。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    paramResult: 1, // 何番目のMIFAREパラメータオブジェクトにマッチしたか
+    idm: &quot;00112233445566&quot;, // UID
+    data: &quot;aabbccdd&quot; // 読み取ったデータ
+})
+</code></pre>
+<p>認証またはデータ読み取りに失敗した場合、<a href="paramonevent.html">onEvent</a>がeventCode=1で呼ばれる。<code>paramResult</code>は負の値が渡される。</p>
+<pre><code class="language-js">onEvent(1, {
+    category: 2, // 2:Type A
+    paramResult: -1 // 1番目のMIFAREパラメータオブジェクトの読み取りに失敗
+})
+</code></pre>
+<p>読み取りの成功・失敗に関わらず、消失検出フェーズに移行する。</p>
+<h2 id="_3">消失検出フェーズ<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>同じカードを繰り返し検出することを避けるためのフェーズである。
+異なるUIDのカードの応答を受信するか応答が無くなった場合に消失とみなす。</p>
+<p>消失時、<a href="paramonevent.html">onEvent</a>がeventCode=0で呼ばれる。
+通知されるUIDは、(「異なるUIDのカードの応答を受信」した場合でも) 元々検出したカードのものである。</p>
+<pre><code class="language-js">onEvent(0, {
+    idm: &quot;00112233445566&quot; // UID
+})
+</code></pre>
+<h2 id="mifare">MIFAREパラメータオブジェクト<a class="headerlink" href="#mifare" title="Permanent link">&para;</a></h2>
+<p>MIFARE検出時、先頭のオブジェクトから順に以下の条件を満たすか否かを確認する。</p>
+<ul>
+<li>検出されたMIFAREの種別が、オブジェクトのMIFARE種別(type)と一致</li>
+<li>検出されたMIFAREが、読み取りオブジェクトに含まれるすべての鍵で認証成功</li>
+</ul>
+<p>これらの条件をすべて満たすオブジェクトが見つかった場合、そのオブジェクトに従って動作する。
+1つでも条件を満たさない場合は、次のオブジェクトを検査する。</p>
+<p>設定されたすべてのオブジェクトが条件を満たさない場合や MIFARE以外のTypeAを検知した場合、
+onEventに渡される<code>paramResult</code>はundefinedとなり、UIDのみ通知される。</p>
+<p>UIDのみを取得する場合は、readDataを指定しない。</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>Number(必須)</td>
+<td>検出するMIFARE種別。1:Classic 1K。2:Classic 4K。3:Ultralight。</td>
+</tr>
+<tr>
+<td>readData</td>
+<td>Array</td>
+<td>読み取り対象のサービス(MIFARE読み取りオブジェクト)を配列で、最大4個まで指定する。指定が1つも無い場合、UIDのみをイベント通知する。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mifare_1">MIFARE読み取りオブジェクト<a class="headerlink" href="#mifare_1" title="Permanent link">&para;</a></h2>
+<p>MIFAREの読み取りを指示する際のオブジェクト配列の要素として利用し、最大で4つまで格納可能。 複数の読み取りオブジェクトを指定された場合、指定された領域をすべて読み取り連結してレスポンスオブジェクトのdataとしてレスポンスに格納する。
+読み取りオブジェクトのうち、1つでも読み取りに失敗すると読み取り失敗となる。</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>address</td>
+<td>String(16進数)(必須)</td>
+<td>読み取り対象のブロックアドレスを指定する(0-FF)、Ultralightではページアドレスを指定する。16進数、1-2文字。</td>
+</tr>
+<tr>
+<td>keyType</td>
+<td>Number(必須)</td>
+<td>鍵タイプ指定。0:鍵無し。1:鍵A。2:鍵B。<br/>Classic 1K,Classic 4Kは鍵Aまたは鍵Bを、Ultralightでは鍵無しを指定すること。</td>
+</tr>
+<tr>
+<td>keyValue</td>
+<td>String(16進数)</td>
+<td>鍵、12文字(000000000000-FFFFFFFFFFFF)。<br/>※typeにClassic 1K/4Kを指定した場合は必須、指定なき場合はエラーを発生する。<br/>※typeにUltralightを指定した場合は指定されても無視する。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>MIFARE Classic 1KのUIDのみ読み取り</strong></p>
+<pre><code class="language-js">mifare:[ // MIFAREパラメータオブジェクト
+  {
+    type: 1, // 1:Classic 1K
+  }
+]
+</code></pre>
+<p><strong>MIFARE Classic 1KまたはMIFARE Classic 4Kの読み取り</strong></p>
+<pre><code class="language-js">mifare:[ // MIFAREパラメータオブジェクト
+  {
+    type: 1, // 1:Classic 1K
+    readData: [ // MIFARE読み取りオブジェクト
+      { address: &quot;01&quot;, keyType: 1, keyValue: &quot;001122334455&quot; },
+      { address: &quot;02&quot;, keyType: 1, keyValue: &quot;66778899AABB&quot; },
+    ]
+  },
+  {
+    type: 2, // 2:Classic 4K
+    readData: [ // MIFARE読み取りオブジェクト
+      { address: &quot;03&quot;, keyType: 1, keyValue: &quot;0123456789AB&quot; },
+      { address: &quot;04&quot;, keyType: 2, keyValue: &quot;CDEF01234567&quot; },
+    ]
+  }
+]
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright © 2024 Smart Solution Technology, Inc.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-967WZ6MRP8" defer></script>
+        <script src="js/extra.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
